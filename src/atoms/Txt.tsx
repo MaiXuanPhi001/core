@@ -3,14 +3,13 @@ import { StyleProp, Text, TextProps, TextStyle } from 'react-native';
 import { colors } from '~/themes/colors';
 
 interface Props {
-    text: string
     color?: string
     size?: number
-    fontStyle?: any
+    fs?: "normal" | "italic"
     font?: string
-    flex?: number
-    alignSelf?: 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch'
-    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+    f?: number
+    as?: 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch'
+    fw?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
     bold?: boolean
     m?: number
     mx?: number
@@ -20,20 +19,20 @@ interface Props {
     mb?: number
     ml?: number
     bg?: string
-    opacity?: number
+    o?: number
     position?: 'absolute' | 'relative'
     styles?: StyleProp<TextStyle>
+    children?: Element
 }
 
 const Txt: React.FC<Props & TextProps> = ({
-    text = '',
     color = colors.black,
     size = 14,
-    fontStyle,
+    fs,
     font,
-    flex,
-    alignSelf,
-    fontWeight,
+    f,
+    as,
+    fw,
     bold,
     m,
     mx,
@@ -43,20 +42,21 @@ const Txt: React.FC<Props & TextProps> = ({
     mb,
     ml,
     bg,
-    opacity,
+    o,
     position,
     styles,
+    children,
     ...rest
 }) => {
     const txtStyle: StyleProp<TextStyle> = [
         {
             color,
             fontSize: size,
-            fontStyle,
+            fontStyle: fs,
             fontFamily: font,
-            flex,
-            alignSelf,
-            fontWeight,
+            flex: f,
+            alignSelf: as,
+            fontWeight: fw,
             margin: m,
             marginHorizontal: mx,
             marginVertical: my,
@@ -65,7 +65,7 @@ const Txt: React.FC<Props & TextProps> = ({
             marginBottom: mb,
             marginLeft: ml,
             backgroundColor: bg,
-            opacity,
+            opacity: o,
             position,
         },
         bold && { fontWeight: 'bold' }
@@ -79,7 +79,7 @@ const Txt: React.FC<Props & TextProps> = ({
             ]}
             {...rest}
         >
-            {text}
+            {children}
         </Text>
     )
 }

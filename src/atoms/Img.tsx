@@ -1,13 +1,14 @@
 import React from 'react';
-import { DimensionValue, StyleProp, TextStyle, View, ViewProps, ViewStyle } from 'react-native';
+import { DimensionValue, Image, ImageProps, ImageStyle, StyleProp, TextInputProps, TextStyle, ViewStyle } from 'react-native';
+import { colors } from '~/themes/colors';
 
 interface Props {
     f?: number
+    color?: string
     w?: DimensionValue
     h?: DimensionValue
     mw?: DimensionValue
     mh?: DimensionValue
-    row?: boolean
     m?: number
     mx?: number
     my?: number
@@ -24,12 +25,7 @@ interface Props {
     pl?: number
     bg?: string
     o?: number
-    wrap?: boolean
-    ai?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'
-    as?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
     position?: 'absolute' | 'relative'
-    center?: boolean
-    jc?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly"
     radius?: number
     borderTopLeftRadius?: number
     borderTopRightRadius?: number
@@ -38,18 +34,16 @@ interface Props {
     borderWidth?: number
     borderColor?: string
     zIndex?: number
-    overflow?: "visible" | "hidden" | "scroll"
-    children?: React.JSX.Element | React.JSX.Element[]
-    styles?: StyleProp<TextStyle>
+    styles?: StyleProp<ImageProps>
 }
 
-const Box: React.FC<Props & ViewProps> = ({
+const Img: React.FC<Props & ImageProps> = ({
     f,
+    color = colors.black,
     w,
     h,
     mw,
     mh,
-    row,
     m,
     mx,
     my,
@@ -67,11 +61,6 @@ const Box: React.FC<Props & ViewProps> = ({
     bg,
     o,
     position,
-    wrap,
-    ai,
-    as,
-    jc,
-    center,
     radius,
     borderTopLeftRadius,
     borderTopRightRadius,
@@ -80,12 +69,10 @@ const Box: React.FC<Props & ViewProps> = ({
     borderWidth,
     borderColor,
     zIndex,
-    overflow,
     styles,
-    children,
     ...rest
 }) => {
-    const boxStyle: StyleProp<ViewStyle> = [
+    const inputStyle: StyleProp<ImageStyle> = [
         {
             flex: f,
             width: w,
@@ -109,9 +96,6 @@ const Box: React.FC<Props & ViewProps> = ({
             backgroundColor: bg,
             opacity: o,
             position,
-            alignItems: ai,
-            alignSelf: as,
-            justifyContent: jc,
             borderRadius: radius,
             borderTopLeftRadius,
             borderTopRightRadius,
@@ -120,25 +104,18 @@ const Box: React.FC<Props & ViewProps> = ({
             borderWidth,
             borderColor,
             zIndex,
-            overflow,
         },
-        row && { flexDirection: 'row' },
-        wrap && { flexWrap: 'wrap' },
-        center && { alignItems: 'center', justifyContent: 'center' },
-        (!f && !as)&& { alignSelf: 'flex-start' }
     ]
 
     return (
-        <View
+        <Image
             style={[
-                boxStyle,
-                styles
+                inputStyle,
+                styles,
             ]}
             {...rest}
-        >
-            {children}
-        </View>
+        />
     )
 }
 
-export default Box
+export default Img
