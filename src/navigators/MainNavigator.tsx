@@ -4,7 +4,13 @@ import Setting from '~/screens/setting/Setting';
 import TabNavigator from './TabNavigator';
 import Detail from '~/screens/detail/Detail';
 
-const Stack = createNativeStackNavigator();
+export type MainStackParamList = {
+    TabNavigator: undefined;
+    Setting: undefined;
+    Detail: undefined;
+}
+
+const Stack = createNativeStackNavigator<MainStackParamList>();
 
 const MainNavigator = () => {
     return (

@@ -1,11 +1,17 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import Hello from '../screens/Hello';
+import Hello from '../screens/hello/Hello';
 import AuthNavigator from './AuthNavigator';
 import MainNavigator from './MainNavigator';
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+    Hello: undefined;
+    AuthNavigator: { id: number };
+    MainNavigator: undefined;
+}
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Navigation = () => {
     return (

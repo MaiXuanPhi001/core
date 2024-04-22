@@ -1,9 +1,12 @@
-import { View, Text, Button } from 'react-native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { Button, Text, View } from 'react-native'
+import { AuthStackParamList } from '~/navigators/AuthNavigator'
 
 const Login = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<NativeStackNavigationProp<AuthStackParamList>>()
+  const route = useRoute<RouteProp<AuthStackParamList>>()
   return (
     <View>
       <Text>Login</Text>
@@ -19,6 +22,7 @@ const Login = () => {
           navigation.replace('MainNavigator')
         }}
       />
+      <Text>id: {route.params?.id}</Text>
     </View>
   )
 }
