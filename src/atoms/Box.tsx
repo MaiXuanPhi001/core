@@ -28,6 +28,10 @@ interface Props {
     ai?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'
     as?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
     position?: 'absolute' | 'relative'
+    top?: number
+    right?: number 
+    bottom?: number 
+    left?: number
     center?: boolean
     jc?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly"
     radius?: number
@@ -40,7 +44,7 @@ interface Props {
     zIndex?: number
     overflow?: "visible" | "hidden" | "scroll"
     children?: React.JSX.Element | React.JSX.Element[]
-    styles?: StyleProp<TextStyle>
+    styles?: StyleProp<ViewStyle>
 }
 
 const Box: React.FC<Props & ViewProps> = ({
@@ -67,6 +71,10 @@ const Box: React.FC<Props & ViewProps> = ({
     bg,
     o,
     position,
+    top,
+    right, 
+    bottom, 
+    left,
     wrap,
     ai,
     as,
@@ -109,6 +117,10 @@ const Box: React.FC<Props & ViewProps> = ({
             backgroundColor: bg,
             opacity: o,
             position,
+            top,
+            right, 
+            bottom, 
+            left,
             alignItems: ai,
             alignSelf: as,
             justifyContent: jc,
@@ -132,7 +144,7 @@ const Box: React.FC<Props & ViewProps> = ({
         <View
             style={[
                 boxStyle,
-                styles
+                styles, // ko nen xoa
             ]}
             {...rest}
         >

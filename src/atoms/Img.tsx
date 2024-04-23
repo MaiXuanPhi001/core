@@ -26,6 +26,10 @@ interface Props {
     bg?: string
     o?: number
     position?: 'absolute' | 'relative'
+    top?: number
+    right?: number 
+    bottom?: number 
+    left?: number
     radius?: number
     borderTopLeftRadius?: number
     borderTopRightRadius?: number
@@ -34,7 +38,7 @@ interface Props {
     borderWidth?: number
     borderColor?: string
     zIndex?: number
-    styles?: StyleProp<ImageProps>
+    styles?: StyleProp<ImageStyle>
 }
 
 const Img: React.FC<Props & ImageProps> = ({
@@ -61,6 +65,10 @@ const Img: React.FC<Props & ImageProps> = ({
     bg,
     o,
     position,
+    top,
+    right, 
+    bottom, 
+    left,
     radius,
     borderTopLeftRadius,
     borderTopRightRadius,
@@ -96,6 +104,10 @@ const Img: React.FC<Props & ImageProps> = ({
             backgroundColor: bg,
             opacity: o,
             position,
+            top,
+            right, 
+            bottom, 
+            left,
             borderRadius: radius,
             borderTopLeftRadius,
             borderTopRightRadius,

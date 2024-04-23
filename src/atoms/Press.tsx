@@ -1,14 +1,13 @@
 import React from 'react';
-import { DimensionValue, StyleProp, TextInput, TextInputProps, TextStyle, ViewProps, ViewStyle } from 'react-native';
-import { colors } from '~/themes/colors';
+import { DimensionValue, Pressable, PressableProps, StyleProp, ViewStyle } from 'react-native';
 
 interface Props {
     f?: number
-    color?: string
     w?: DimensionValue
     h?: DimensionValue
     mw?: DimensionValue
     mh?: DimensionValue
+    row?: boolean
     m?: number
     mx?: number
     my?: number
@@ -25,11 +24,16 @@ interface Props {
     pl?: number
     bg?: string
     o?: number
+    wrap?: boolean
+    ai?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'
+    as?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
     position?: 'absolute' | 'relative'
     top?: number
     right?: number 
     bottom?: number 
     left?: number
+    center?: boolean
+    jc?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly"
     radius?: number
     borderTopLeftRadius?: number
     borderTopRightRadius?: number
@@ -38,16 +42,18 @@ interface Props {
     borderWidth?: number
     borderColor?: string
     zIndex?: number
+    overflow?: "visible" | "hidden" | "scroll"
     styles?: StyleProp<ViewStyle>
+    children?: React.JSX.Element | React.JSX.Element[]
 }
 
-const Input: React.FC<Props & TextInputProps> = ({
+const Press: React.FC<Props & PressableProps> = ({
     f,
-    color = colors.black,
     w,
     h,
     mw,
     mh,
+    row,
     m,
     mx,
     my,
@@ -69,6 +75,11 @@ const Input: React.FC<Props & TextInputProps> = ({
     right, 
     bottom, 
     left,
+    wrap,
+    ai,
+    as,
+    jc,
+    center,
     radius,
     borderTopLeftRadius,
     borderTopRightRadius,
@@ -77,14 +88,14 @@ const Input: React.FC<Props & TextInputProps> = ({
     borderWidth,
     borderColor,
     zIndex,
-    styles,
+    overflow,
     children,
+    styles,
     ...rest
 }) => {
-    const inputStyle: StyleProp<ViewStyle & TextStyle> = [
+    const pressStyle: StyleProp<ViewStyle> = [
         {
             flex: f,
-            color,
             width: w,
             height: h,
             maxWidth: mw,
@@ -110,6 +121,9 @@ const Input: React.FC<Props & TextInputProps> = ({
             right, 
             bottom, 
             left,
+            alignItems: ai,
+            alignSelf: as,
+            justifyContent: jc,
             borderRadius: radius,
             borderTopLeftRadius,
             borderTopRightRadius,
@@ -118,18 +132,21 @@ const Input: React.FC<Props & TextInputProps> = ({
             borderWidth,
             borderColor,
             zIndex,
+            overflow,
         },
+        row && { flexDirection: 'row' },
+        wrap && { flexWrap: 'wrap' },
+        center && { alignItems: 'center', justifyContent: 'center' },
     ]
 
     return (
-        <TextInput
-            style={[
-                inputStyle,
-                styles,
-            ]}
+        <Pressable
+            style={[pressStyle, styles]}
             {...rest}
-        />
+        >
+            {children}
+        </Pressable>
     )
 }
 
-export default Input
+export default Press

@@ -21,6 +21,10 @@ interface Props {
     bg?: string
     o?: number
     position?: 'absolute' | 'relative'
+    top?: number
+    right?: number
+    bottom?: number
+    left?: number
     styles?: StyleProp<TextStyle>
     children?: Element
 }
@@ -44,6 +48,10 @@ const Txt: React.FC<Props & TextProps> = ({
     bg,
     o,
     position,
+    top,
+    right,
+    bottom,
+    left,
     styles,
     children,
     ...rest
@@ -67,16 +75,17 @@ const Txt: React.FC<Props & TextProps> = ({
             backgroundColor: bg,
             opacity: o,
             position,
+            top,
+            right,
+            bottom,
+            left,
         },
         bold && { fontWeight: 'bold' }
     ]
 
     return (
         <Text
-            style={[
-                txtStyle,
-                styles
-            ]}
+            style={[txtStyle, styles]}
             {...rest}
         >
             {children}
